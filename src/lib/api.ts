@@ -2,6 +2,8 @@ const isDev = import.meta.env.DEV;
 
 export const API_URL = import.meta.env.VITE_API_URL;
 
+console.log("Using API_URL:", API_URL);
+
 export const fetchBudgets = async () => {
   const res = await fetch(API_URL);
   return await res.json();
