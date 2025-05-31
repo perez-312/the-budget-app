@@ -1,5 +1,6 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchBudgets } from "@/lib/api"; 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ExpenseTracker } from "@/components/ExpenseTracker";
@@ -63,6 +64,14 @@ const Index = () => {
     { id: "1", name: "Rent", amount: 800, dueDate: "2024-06-01", category: "Housing", isPaid: false },
     { id: "2", name: "Electric Bill", amount: 85, dueDate: "2024-06-05", category: "Utilities", isPaid: true },
   ]);
+
+  useEffect(() => {
+    fetchBudgets().then(data => {
+      console.log("Fetched budgets from API:", data);
+    }).catch(err => {
+      console.error("API error:", err);
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
