@@ -19,3 +19,11 @@ export const createBudget = async (title: string, amount: number) => {
   });
   return await res.json();
 };
+
+console.log("Using API_URL:", API_URL);
+
+fetchBudgets().then(data => {
+  console.log("Fetched budgets from API:", data);
+}).catch(err => {
+  console.error("Error fetching budgets:", err);
+});
