@@ -1,6 +1,6 @@
 const isDev = import.meta.env.DEV;
 
-export const API_URL = import.meta.env.VITE_API_URL || "https://93eogce5if.execute-api.us-east-1.amazonaws.com/dev";
+export const API_URL = import.meta.env.VITE_API_URL || "https://93eogce5if.execute-api.us-east-1.amazonaws.com/dev/budget";
 
 console.log("Using API_URL:", API_URL);
 
