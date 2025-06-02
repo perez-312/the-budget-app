@@ -25,7 +25,7 @@ export const ExpenseTracker = ({ expenses, setExpenses }: ExpenseTrackerProps) =
 
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  const addExpense = () => {
+  const addExpense = async () => {
     if (newExpense.name && newExpense.amount && newExpense.category) {
       const expense: Expense = {
         id: Date.now().toString(),
@@ -34,6 +34,19 @@ export const ExpenseTracker = ({ expenses, setExpenses }: ExpenseTrackerProps) =
         category: newExpense.category,
         date: newExpense.date,
       };
+
+      try {
+        await fetch("https://93eogce5if.execute-api.us-east-1.amazonaws.com/dev/budget", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(expense),
+        });
+      } catch (error) {
+        console.error("Failed to save expense to backend:", error);
+      }
+
       setExpenses([...expenses, expense]);
       setNewExpense({ name: "", amount: "", category: "", date: new Date().toISOString().split('T')[0] });
     }
